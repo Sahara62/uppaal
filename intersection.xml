@@ -3,51 +3,51 @@
 <nta>
 	<declaration>// Place global declarations here.</declaration>
 	<template>
-		<name x="5" y="5">Template</name>
+		<name x="5" y="5">Intersection</name>
 		<declaration>// Place local declarations here.</declaration>
-		<location id="id0" x="-93" y="-127">
+		<location id="id0" x="-136" y="-136">
 		</location>
-		<location id="id1" x="51" y="-127">
+		<location id="id1" x="85" y="-144">
 		</location>
-		<location id="id2" x="-68" y="153">
+		<location id="id2" x="-127" y="153">
 		</location>
-		<location id="id3" x="76" y="161">
+		<location id="id3" x="85" y="161">
 		</location>
-		<location id="id4" x="187" y="68">
+		<location id="id4" x="187" y="76">
 		</location>
-		<location id="id5" x="-170" y="85">
+		<location id="id5" x="-221" y="68">
 		</location>
-		<location id="id6" x="-178" y="-59">
+		<location id="id6" x="-212" y="-59">
 		</location>
-		<location id="id7" x="136" y="-68">
+		<location id="id7" x="187" y="-59">
 		</location>
-		<location id="id8" x="-119" y="8">
+		<location id="id8" x="-127" y="8">
 		</location>
-		<location id="id9" x="76" y="0">
+		<location id="id9" x="85" y="0">
 		</location>
-		<location id="id10" x="-8" y="85">
+		<location id="id10" x="-17" y="68">
 		</location>
-		<location id="id11" x="-25" y="-76">
+		<location id="id11" x="-17" y="-59">
 		</location>
-		<location id="id12" x="17" y="34">
+		<location id="id12" x="25" y="34">
 		</location>
-		<location id="id13" x="-42" y="34">
+		<location id="id13" x="-68" y="34">
 		</location>
-		<location id="id14" x="-59" y="-34">
+		<location id="id14" x="-76" y="-25">
 		</location>
 		<location id="id15" x="-17" y="0">
 		</location>
-		<location id="id16" x="17" y="-34">
+		<location id="id16" x="34" y="-25">
 		</location>
-		<location id="id17" x="68" y="68">
+		<location id="id17" x="85" y="76">
 		</location>
-		<location id="id18" x="-76" y="59">
+		<location id="id18" x="-119" y="68">
 		</location>
-		<location id="id19" x="59" y="-68">
+		<location id="id19" x="85" y="-59">
 		</location>
-		<location id="id20" x="-93" y="-59">
+		<location id="id20" x="-127" y="-59">
 		</location>
-		<location id="id21" x="-229" y="-153">
+		<location id="id21" x="-204" y="-178">
 		</location>
 		<init ref="id21"/>
 		<transition>
@@ -180,9 +180,11 @@
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-Process = Template();
+C1 = Intersection();
+C2 = Intersection();
+C3 = Intersection();
 // List one or more processes to be composed into a system.
-system Process;
+system C1,C2,C3;
     </system>
 	<queries>
 	</queries>
