@@ -174,7 +174,7 @@ int vec;</declaration>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id22"/>
-			<label kind="assignment" x="791" y="229">b:=0,c:=0</label>
+			<label kind="assignment" x="799" y="221">b:=0,c:=0</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
@@ -329,18 +329,13 @@ C1 = Intersection();
 C2 = Intersection();
 C3 = Intersection();
 C4 = Intersection();
+C5 = Intersection();
 // List one or more processes to be composed into a system.
-system C1,C2,C3,C4;
+system C1,C2,C3,C4,C5;
     </system>
 	<queries>
 		<query>
 			<formula>A[] not(C1.a3 &amp;&amp; C2.b3)
-			</formula>
-			<comment>
-			</comment>
-		</query>
-		<query>
-			<formula>A[] not(C1.c3 &amp;&amp; C2.b3)
 			</formula>
 			<comment>
 			</comment>
