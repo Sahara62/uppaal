@@ -347,7 +347,7 @@ system C1,C2,C3,C4,C5;
 			</comment>
 		</query>
 		<query>
-			<formula>A[] not(C1.b4 &amp;&amp; C2.d4)
+			<formula>E&lt;&gt; not(C1.b4 &amp;&amp; C2.d4)
 			</formula>
 			<comment>
 			</comment>
