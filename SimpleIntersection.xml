@@ -26,7 +26,6 @@ clock local_clock;</declaration>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-17" y="68">cross:=0</label>
 			<nail x="144" y="68"/>
 			<nail x="161" y="-85"/>
 		</transition>
@@ -40,7 +39,7 @@ clock local_clock;</declaration>
 			<source ref="id1"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-59" y="8">local_clock&gt;=5</label>
-			<label kind="assignment" x="-59" y="25">local_clock:=0</label>
+			<label kind="assignment" x="-59" y="25">local_clock:=0,cross:=0</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -70,13 +69,13 @@ clock local_clock;</declaration>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id7"/>
-			<label kind="assignment" x="-42" y="-161">cross:=0</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id4"/>
 			<label kind="guard" x="-93" y="-51">local_clock&gt;=5</label>
-			<label kind="assignment" x="-93" y="-34">local_clock:=0</label>
+			<label kind="assignment" x="-93" y="-34">local_clock:=0,
+cross:=0</label>
 		</transition>
 		<transition>
 			<source ref="id6"/>
