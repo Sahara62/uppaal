@@ -91,10 +91,10 @@ cross:=0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-Car1 = vertical();
-Car2 = horizon();
+verticalCar1 = vertical();
+horizonCar1 = horizon();
 // List one or more processes to be composed into a system.
-system Car1,Car2;
+system verticalCar1,horizonCar1;
     </system>
 	<queries>
 		<query>
