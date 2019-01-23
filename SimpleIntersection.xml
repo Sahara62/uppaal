@@ -5,7 +5,7 @@
 clock global_clock;
 int cross;</declaration>
 	<template>
-		<name x="5" y="5"> vertical</name>
+		<name x="5" y="5"> CarCouse</name>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
 		<location id="id0" x="-59" y="76">
@@ -49,52 +49,32 @@ clock local_clock;</declaration>
 		</transition>
 	</template>
 	<template>
-		<name>horizon</name>
+		<name>locker</name>
 		<declaration>clock local_clock;</declaration>
-		<location id="id4" x="42" y="-59">
-			<name x="32" y="-93">B3</name>
+		<location id="id4" x="-93" y="-68">
+			<name x="-110" y="-42">lock</name>
 		</location>
-		<location id="id5" x="-110" y="-59">
-			<name x="-120" y="-93">B2</name>
-			<label kind="invariant" x="-161" y="-110">local_clock&lt;15</label>
+		<location id="id5" x="-93" y="-204">
+			<name x="-103" y="-238">unlock</name>
 		</location>
-		<location id="id6" x="-280" y="-59">
-			<name x="-290" y="-93">B1</name>
-			<label kind="invariant" x="-365" y="-42">local_clock&lt;20</label>
-		</location>
-		<location id="id7" x="-93" y="-204">
-			<name x="-103" y="-238">respone</name>
-		</location>
-		<init ref="id7"/>
+		<init ref="id5"/>
 		<transition>
 			<source ref="id4"/>
-			<target ref="id7"/>
+			<target ref="id5"/>
+			<nail x="-51" y="-136"/>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-93" y="-51">local_clock&gt;=5</label>
-			<label kind="assignment" x="-93" y="-34">local_clock:=0,
-cross:=0</label>
-		</transition>
-		<transition>
-			<source ref="id6"/>
-			<target ref="id5"/>
-			<label kind="guard" x="-246" y="-51">local_clock&gt;=10</label>
-			<label kind="assignment" x="-246" y="-34">local_clock:=0</label>
-		</transition>
-		<transition>
-			<source ref="id7"/>
-			<target ref="id6"/>
-			<label kind="guard" x="-221" y="-170">cross==0</label>
-			<label kind="assignment" x="-340" y="-153">cross:=1,local_clock:=0</label>
+			<nail x="-136" y="-136"/>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-verticalCar1 = vertical();
-horizonCar1 = horizon();
+ns = CarCouse();
+sn = CarCouse();
+locker= locker();
 // List one or more processes to be composed into a system.
-system verticalCar1,horizonCar1;
+system ns,sn,locker;
     </system>
 	<queries>
 		<query>
