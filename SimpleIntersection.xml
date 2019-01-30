@@ -2,10 +2,9 @@
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
 	<declaration>// Place global declarations here.
-clock global_clock;
 int cross;</declaration>
 	<template>
-		<name x="5" y="5"> CarCouse</name>
+		<name x="5" y="5">CarCouse</name>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
 		<location id="id0" x="-59" y="76">
@@ -21,19 +20,21 @@ clock local_clock;</declaration>
 		</location>
 		<location id="id3" x="119" y="-195">
 			<name x="109" y="-229">respone</name>
+			<label kind="invariant" x="144" y="-204">local_clock&lt;=200</label>
 		</location>
 		<init ref="id3"/>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
+			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
 			<nail x="144" y="68"/>
 			<nail x="161" y="-85"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-34" y="-195">cross==0</label>
-			<label kind="assignment" x="-93" y="-178">cross:=1,local_clock:=0</label>
+			<label kind="guard" x="-136" y="-204">cross==0 &amp;&amp; local_clock&gt;=100</label>
+			<label kind="assignment" x="-119" y="-178">cross:=1,local_clock:=0</label>
 		</transition>
 		<transition>
 			<source ref="id1"/>
@@ -48,35 +49,19 @@ clock local_clock;</declaration>
 			<label kind="assignment" x="-59" y="-93">local_clock:=0</label>
 		</transition>
 	</template>
-	<template>
-		<name>locker</name>
-		<declaration>clock local_clock;</declaration>
-		<location id="id4" x="-93" y="-68">
-			<name x="-110" y="-42">lock</name>
-		</location>
-		<location id="id5" x="-93" y="-204">
-			<name x="-103" y="-238">unlock</name>
-		</location>
-		<init ref="id5"/>
-		<transition>
-			<source ref="id4"/>
-			<target ref="id5"/>
-			<nail x="-51" y="-136"/>
-		</transition>
-		<transition>
-			<source ref="id5"/>
-			<target ref="id4"/>
-			<nail x="-136" y="-136"/>
-		</transition>
-	</template>
 	<system>// Place template instantiations here.
 ns = CarCouse();
-sn = CarCouse();
-locker= locker();
+ew = CarCouse();
 // List one or more processes to be composed into a system.
-system ns,sn,locker;
+system ns,ew;
     </system>
 	<queries>
+		<query>
+			<formula>E&lt;&gt; deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
 		<query>
 			<formula>A[] not deadlock
 			</formula>
