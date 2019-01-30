@@ -51,9 +51,11 @@ clock local_clock;</declaration>
 	</template>
 	<system>// Place template instantiations here.
 ns = CarCouse();
+sn = CarCouse();
 ew = CarCouse();
+we = CarCouse();
 // List one or more processes to be composed into a system.
-system ns,ew;
+system ns,sn,ew,we;
     </system>
 	<queries>
 		<query>
