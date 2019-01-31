@@ -28,13 +28,6 @@ clock local_clock;</declaration>
 		</location>
 		<init ref="id3"/>
 		<transition>
-			<source ref="id0"/>
-			<target ref="id3"/>
-			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
-			<nail x="187" y="76"/>
-			<nail x="204" y="-17"/>
-		</transition>
-		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
 			<label kind="guard" x="-42" y="-170">L1==0 &amp;&amp;L2==0 &amp;&amp; cross==0</label>
