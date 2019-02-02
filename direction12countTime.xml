@@ -13,18 +13,18 @@ int cross;</declaration>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
 		<location id="id0" x="-59" y="76">
-			<name x="-85" y="42">A3</name>
+			<name x="-110" y="42">通過後</name>
 		</location>
 		<location id="id1" x="-59" y="-17">
-			<name x="-85" y="-51">A2</name>
+			<name x="-110" y="-51">交差点</name>
 			<label kind="invariant" x="-178" y="-25">local_clock&lt;15</label>
 		</location>
 		<location id="id2" x="-59" y="-127">
-			<name x="-102" y="-153">A1</name>
+			<name x="-110" y="-161">進入前</name>
 			<label kind="invariant" x="-178" y="-136">local_clock&lt;20</label>
 		</location>
 		<location id="id3" x="178" y="-127">
-			<name x="110" y="-119">respone</name>
+			<name x="110" y="-119">初期状態</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
