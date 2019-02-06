@@ -6,6 +6,7 @@ int lock1;
 int lock2;
 int lock3;
 int lock4;
+clock total;
 </declaration>
 	<template>
 		<name x="5" y="5">CarCouse</name>
