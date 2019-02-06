@@ -21,7 +21,7 @@ clock local_clock;</declaration>
 		</location>
 		<location id="id2" x="-59" y="-17">
 			<name x="-136" y="-51">CrossErea</name>
-			<label kind="invariant" x="-178" y="-25">local_clock&lt;15</label>
+			<label kind="invariant" x="-178" y="-25">local_clock&lt;10</label>
 		</location>
 		<location id="id3" x="-59" y="-127">
 			<name x="-161" y="-161">enteringErea</name>
@@ -65,14 +65,25 @@ system ns,sn,ew,we;
 </system>
 	<queries>
 		<query>
+			<formula>E&lt;&gt; (sn.CrossErea &amp;&amp; ns.CrossErea)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
 			<formula>A[] not(sn.CrossErea &amp;&amp; ew.CrossErea)
-
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
 			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (total &gt; 160 imply (ns.finish &amp;&amp; sn.finish &amp;&amp; ew.finish &amp;&amp; we.finish))
 			</formula>
 			<comment>
 			</comment>
