@@ -62,16 +62,11 @@ we = CarCouse(lock1,lock2);
 
 // List one or more processes to be composed into a system.
 system ns,sn,ew,we;
-    </system>
+</system>
 	<queries>
 		<query>
-			<formula>E&lt;&gt; deadlock
-			</formula>
-			<comment>
-			</comment>
-		</query>
-		<query>
-			<formula>A[] not (nw.A2 &amp;&amp; se.A2)
+			<formula>A[] not(sn.CrossErea &amp;&amp; ew.CrossErea)
+
 			</formula>
 			<comment>
 			</comment>
