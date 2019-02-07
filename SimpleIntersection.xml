@@ -16,23 +16,23 @@ clock local_clock;</declaration>
 			<name x="-127" y="42">Passed</name>
 		</location>
 		<location id="id1" x="-59" y="-17">
-			<name x="-144" y="-51">onTheWay</name>
-			<label kind="invariant" x="-178" y="-25">local_clock&lt;15</label>
+			<name x="-144" y="-51">crossErea</name>
+			<label kind="invariant" x="-178" y="-34">local_clock&lt;7</label>
 		</location>
 		<location id="id2" x="-59" y="-127">
 			<name x="-144" y="-153">BeforeEnter</name>
 			<label kind="invariant" x="-178" y="-136">local_clock&lt;20</label>
 		</location>
 		<location id="id3" x="178" y="-127">
-			<name x="110" y="-119">respawn</name>
+			<name x="102" y="-119">respawn</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
 			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
-			<nail x="187" y="76"/>
-			<nail x="204" y="-17"/>
+			<nail x="195" y="76"/>
+			<nail x="204" y="17"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
@@ -43,14 +43,14 @@ clock local_clock;</declaration>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-59" y="8">local_clock&gt;=5</label>
-			<label kind="assignment" x="-59" y="25">local_clock:=0,L1:=0,L2:=0,cross:=0</label>
+			<label kind="guard" x="-51" y="8">local_clock&gt;=3</label>
+			<label kind="assignment" x="-51" y="25">local_clock:=0,L1:=0,L2:=0,cross:=0</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-59" y="-106">local_clock&gt;=10</label>
-			<label kind="assignment" x="-59" y="-93">local_clock:=0</label>
+			<label kind="guard" x="-51" y="-102">local_clock&gt;=10</label>
+			<label kind="assignment" x="-51" y="-85">local_clock:=0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
@@ -72,18 +72,6 @@ ws = CarCouse(lock1,lock4,1);
 system ns,sn,ew,we,ne,sw,es,wn,nw,se,en,ws;
     </system>
 	<queries>
-		<query>
-			<formula>E&lt;&gt; deadlock
-			</formula>
-			<comment>
-			</comment>
-		</query>
-		<query>
-			<formula>A[] not (nw.A2 &amp;&amp; se.A2)
-			</formula>
-			<comment>
-			</comment>
-		</query>
 		<query>
 			<formula>A[] not deadlock
 			</formula>
