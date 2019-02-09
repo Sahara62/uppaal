@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int lock1;
+int lock2;
+int lock3;
+int lock4;
+</declaration>
+	<template>
+		<name x="5" y="5">CarCouse</name>
+		<parameter>int &amp;L1, int &amp;L2</parameter>
+		<declaration>// Place local declarations here.
+clock local_clock;</declaration>
+		<location id="id0" x="-59" y="76">
+			<name x="-127" y="42">Passed</name>
+		</location>
+		<location id="id1" x="-59" y="-17">
+			<name x="-144" y="-51">crossErea</name>
+			<label kind="invariant" x="-178" y="-34">local_clock&lt;7</label>
+		</location>
+		<location id="id2" x="-59" y="-127">
+			<name x="-144" y="-153">BeforeEnter</name>
+			<label kind="invariant" x="-178" y="-136">local_clock&lt;15</label>
+		</location>
+		<location id="id3" x="178" y="-127">
+			<name x="102" y="-119">respawn</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
+			<nail x="195" y="76"/>
+			<nail x="204" y="17"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-25" y="-170">L1==0 &amp;&amp;L2==0</label>
+			<label kind="assignment" x="-42" y="-153">local_clock:=0,L1:=1,L2:=1</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-51" y="8">local_clock&gt;=3</label>
+			<label kind="assignment" x="-51" y="25">local_clock:=0,L1:=0,L2:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-51" y="-102">local_clock&gt;=10</label>
+			<label kind="assignment" x="-51" y="-85">local_clock:=0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+ns = CarCouse(lock2,lock4);
+sn = CarCouse(lock3,lock1);
+ew = CarCouse(lock4,lock3);
+we = CarCouse(lock1,lock2);
+// List one or more processes to be composed into a system.
+system ns,sn,ew,we;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
