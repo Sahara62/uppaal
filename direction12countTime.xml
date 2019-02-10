@@ -31,14 +31,14 @@ clock local_clock;</declaration>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-34" y="-178">L1==0 &amp;&amp;L2==0 &amp;&amp; cross==0</label>
+			<label kind="guard" x="-34" y="-178">L1==0 &amp;&amp; L2==0 &amp;&amp; cross==0</label>
 			<label kind="assignment" x="-59" y="-161">local_clock:=0,L1:=1,L2:=1,cross:=use</label>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-51" y="8">local_clock&gt;=2</label>
-			<label kind="assignment" x="-51" y="25">L1:=0,L2:=0,cross:=0</label>
+			<label kind="assignment" x="-51" y="25">L1:=0,L2:=0,cross:=(1-use)*cross</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -67,13 +67,19 @@ system ns,sn,ew,we,ne,sw,es,wn,nw,se,en,ws;
     </system>
 	<queries>
 		<query>
-			<formula>E&lt;&gt; (gc&lt;45 and ns.finish and sn.finish and ew.finish and we.finish and ne.finish and sw.finish and es.finish and wn.finish and nw.finish and se.finish and en.finish and ws.finish)
+			<formula>A[] not(se.crossArea &amp;&amp; ws.crossArea)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; (gc==45 and ns.finish and sn.finish and ew.finish and we.finish and ne.finish and sw.finish and es.finish and wn.finish and nw.finish and se.finish and en.finish and ws.finish)
+			<formula>A[] (gc&lt;42 imply not (ns.finish and sn.finish and ew.finish and we.finish and ne.finish and sw.finish and es.finish and wn.finish and nw.finish and se.finish and en.finish and ws.finish))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==42 and ns.finish and sn.finish and ew.finish and we.finish and ne.finish and sw.finish and es.finish and wn.finish and nw.finish and se.finish and en.finish and ws.finish)
 			</formula>
 			<comment>
 			</comment>
