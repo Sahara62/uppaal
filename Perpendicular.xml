@@ -11,7 +11,7 @@ clock local_clock;</declaration>
 			<name x="-127" y="42">Passed</name>
 		</location>
 		<location id="id1" x="-59" y="-17">
-			<name x="-144" y="-51">crossErea</name>
+			<name x="-144" y="-51">crossArea</name>
 			<label kind="invariant" x="-178" y="-34">local_clock&lt;5</label>
 		</location>
 		<location id="id2" x="-59" y="-127">
@@ -25,7 +25,6 @@ clock local_clock;</declaration>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
 			<nail x="144" y="76"/>
 		</transition>
 		<transition>
@@ -38,7 +37,7 @@ clock local_clock;</declaration>
 			<source ref="id1"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-51" y="8">local_clock&gt;=2</label>
-			<label kind="assignment" x="-51" y="25">local_clock:=0,cross:=0</label>
+			<label kind="assignment" x="-51" y="25">cross:=0</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>

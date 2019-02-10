@@ -16,40 +16,38 @@ clock local_clock;</declaration>
 			<name x="-127" y="42">Passed</name>
 		</location>
 		<location id="id1" x="-59" y="-17">
-			<name x="-144" y="-51">crossErea</name>
-			<label kind="invariant" x="-178" y="-34">local_clock&lt;7</label>
+			<name x="-144" y="-51">crossArea</name>
+			<label kind="invariant" x="-178" y="-34">local_clock&lt;5</label>
 		</location>
 		<location id="id2" x="-59" y="-127">
 			<name x="-144" y="-153">BeforeEnter</name>
-			<label kind="invariant" x="-178" y="-136">local_clock&lt;15</label>
+			<label kind="invariant" x="-178" y="-136">local_clock&lt;10</label>
 		</location>
-		<location id="id3" x="178" y="-127">
-			<name x="102" y="-119">respawn</name>
+		<location id="id3" x="187" y="-127">
+			<name x="111" y="-119">respawn</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-8" y="85">local_clock:=0</label>
-			<nail x="195" y="76"/>
-			<nail x="204" y="17"/>
+			<nail x="187" y="76"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-25" y="-170">L1==0 &amp;&amp;L2==0</label>
-			<label kind="assignment" x="-42" y="-153">local_clock:=0,L1:=1,L2:=1</label>
+			<label kind="guard" x="-8" y="-170">L1==0 &amp;&amp; L2==0</label>
+			<label kind="assignment" x="-34" y="-153">local_clock:=0,L1:=1,L2:=1</label>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-51" y="8">local_clock&gt;=3</label>
-			<label kind="assignment" x="-51" y="25">local_clock:=0,L1:=0,L2:=0</label>
+			<label kind="guard" x="-51" y="8">local_clock&gt;=2</label>
+			<label kind="assignment" x="-51" y="25">L1:=0,L2:=0</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-51" y="-102">local_clock&gt;=10</label>
+			<label kind="guard" x="-51" y="-102">local_clock&gt;=5</label>
 			<label kind="assignment" x="-51" y="-85">local_clock:=0</label>
 		</transition>
 	</template>
