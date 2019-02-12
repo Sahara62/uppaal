@@ -43,7 +43,7 @@ clock local_clock;</declaration>
 			<source ref="id1"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-51" y="8">local_clock&gt;=2</label>
-			<label kind="assignment" x="-51" y="25">L1:=0,L2:=0,cross:=0</label>
+			<label kind="assignment" x="-51" y="25">L1:=0,L2:=0,cross:=(1-use)*cross</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>

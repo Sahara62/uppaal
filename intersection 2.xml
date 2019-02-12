@@ -3,14 +3,12 @@
 <nta>
 	<declaration>// Place global declarations here.
 clock global_clock;
-int way;
 int a,b,c,d;
 int cross;</declaration>
 	<template>
 		<name x="5" y="5">Intersection</name>
 		<declaration>// Place local declarations here.
-clock local_clock;
-int vec;</declaration>
+clock local_clock;</declaration>
 		<location id="id0" x="1164" y="306">
 			<name x="1139" y="289">d3</name>
 		</location>
@@ -327,13 +325,8 @@ int vec;</declaration>
 	<system>// Place template instantiations here.
 Car1 = Intersection();
 Car2 = Intersection();
-Car3 = Intersection();
-Car4 = Intersection();
-Car5 = Intersection();
-Car6 = Intersection();
-Car7 = Intersection();
 // List one or more processes to be composed into a system.
-system Car1,Car2,Car3,Car4,Car5,Car6,Car7;
+system Car1,Car2;
     </system>
 	<queries>
 		<query>
