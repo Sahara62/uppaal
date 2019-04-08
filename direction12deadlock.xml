@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int lock1;
+int lock2;
+int lock3;
+int lock4;
+int cross;</declaration>
+	<template>
+		<name x="5" y="5">AV</name>
+		<parameter>int &amp;L1, int &amp;L2, int &amp;L3</parameter>
+		<declaration>// Place local declarations here.
+clock local_clock;</declaration>
+		<location id="id0" x="-450" y="-417">
+			<name x="-518" y="-451">passed</name>
+		</location>
+		<location id="id1" x="-450" y="-518">
+			<name x="-527" y="-551">passing</name>
+			<label kind="invariant" x="-561" y="-526">local_clock&lt;7</label>
+		</location>
+		<location id="id2" x="-450" y="-620">
+			<name x="-510" y="-645">before</name>
+			<label kind="invariant" x="-569" y="-629">local_clock&lt;10</label>
+		</location>
+		<location id="id3" x="-204" y="-620">
+			<name x="-255" y="-611">initial</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<nail x="-204" y="-416"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-442" y="-671">L1==0 &amp;&amp;L2==0 &amp;&amp;L3==0</label>
+			<label kind="assignment" x="-442" y="-654">local_clock:=0,L1:=1,L2:=1,L3:=1</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-442" y="-485">local_clock&gt;=2</label>
+			<label kind="assignment" x="-442" y="-468">L1:=0,L2:=0,L3:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-442" y="-595">local_clock&gt;=5</label>
+			<label kind="assignment" x="-442" y="-578">local_clock:=0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+ns = AV(lock2,lock4,lock4);
+sn = AV(lock3,lock1,lock1);
+ew = AV(lock4,lock3,lock3);
+we = AV(lock1,lock2,lock2);
+
+ne = AV(lock2,lock2,lock2);
+sw = AV(lock3,lock3,lock3);
+es = AV(lock4,lock4,lock4);
+wn = AV(lock1,lock1,lock1);
+
+nw = AV(lock2,lock3,cross);
+se = AV(lock3,lock2,cross);
+en = AV(lock4,lock1,cross);
+ws = AV(lock1,lock4,cross);
+// List one or more processes to be composed into a system.
+system ns,sn,ew,we,ne,sw,es,wn,nw,se,en,ws;
+
+
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
