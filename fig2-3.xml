@@ -31,7 +31,7 @@
 	<template>
 		<name>SigVar</name>
 		<declaration>int sig;
-const int red=0,green=1, yellow=2;</declaration>
+const int red=0, green=1, yellow=2;</declaration>
 		<location id="id3" x="0" y="0">
 		</location>
 		<init ref="id3"/>
