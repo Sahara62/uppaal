@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+	int sig;
+	const int red=0, green=1, yellow=2;
+	</declaration>
+	<template>
+		<name>SigVar</name>
+		<declaration>
+		</declaration>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="76" y="17">sig==green</label>
+			<label kind="assignment" x="68" y="42">sig:=yellow</label>
+			<nail x="85" y="0"/>
+			<nail x="51" y="68"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-161" y="17">sig==yellow</label>
+			<label kind="assignment" x="-127" y="34">sig:=red</label>
+			<nail x="-51" y="59"/>
+			<nail x="-85" y="-1"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-33" y="-102">sig==red</label>
+			<label kind="assignment" x="-34" y="-85">sig:=green</label>
+			<nail x="-51" y="-68"/>
+			<nail x="42" y="-68"/>
+		</transition>
+	</template>
+	<template>
+		<name>ManVar</name>
+		<location id="id1" x="-8" y="0">
+			<name x="-34" y="-25">Go</name>
+		</location>
+		<location id="id2" x="-8" y="-136">
+			<name x="-18" y="-170">Waiting</name>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-8" y="-102">sig==green</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+P = ManVar();
+P2 = SigVar();
+// List one or more processes to be composed into a system.
+system P,P2;
+    </system>
+	<queries>
+	</queries>
+</nta>

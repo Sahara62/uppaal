@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+broadcast chan green, yellow, red;</declaration>
+	<template>
+		<name x="5" y="5">SigLoc</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="85" y="93">
+			<name x="75" y="59">Green</name>
+		</location>
+		<location id="id1" x="-102" y="93">
+			<name x="-144" y="59">Yellow</name>
+		</location>
+		<location id="id2" x="0" y="0">
+			<name x="-10" y="-34">Red</name>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-34" y="102">yellow!</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="42" y="25">green!</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-84" y="29">red!</label>
+		</transition>
+	</template>
+	<template>
+		<name>ManLoc</name>
+		<location id="id3" x="0" y="76">
+			<name x="-25" y="42">Go</name>
+		</location>
+		<location id="id4" x="0" y="0">
+			<name x="-10" y="-34">Waiting</name>
+		</location>
+		<init ref="id4"/>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="8" y="25">green?</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+P = SigLoc();
+P2 = ManLoc();
+// List one or more processes to be composed into a system.
+system P,P2;
+    </system>
+	<queries>
+	</queries>
+</nta>
