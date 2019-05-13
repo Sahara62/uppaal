@@ -13,73 +13,80 @@ clock gc;</declaration>
 		<parameter>int &amp;L1, int &amp;L2,  int &amp;L3</parameter>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
-		<location id="id0" x="-4716" y="-3682">
-			<name x="-4784" y="-3716">final</name>
+		<location id="id0" x="-4539" y="-3945">
+			<name x="-4607" y="-3979">final</name>
 		</location>
-		<location id="id1" x="-4716" y="-3775">
-			<name x="-4792" y="-3810">passing</name>
-			<label kind="invariant" x="-4835" y="-3784">local_clock&lt;7</label>
+		<location id="id1" x="-4539" y="-4038">
+			<name x="-4615" y="-4073">passing</name>
+			<label kind="invariant" x="-4658" y="-4047">local_clock&lt;7</label>
 		</location>
-		<location id="id2" x="-4716" y="-3876">
-			<name x="-4784" y="-3911">before</name>
-			<label kind="invariant" x="-4843" y="-3886">local_clock&lt;10</label>
+		<location id="id2" x="-4539" y="-4139">
+			<name x="-4607" y="-4174">before</name>
+			<label kind="invariant" x="-4666" y="-4149">local_clock&lt;10</label>
 		</location>
-		<location id="id3" x="-4479" y="-3876">
-			<name x="-4537" y="-3869">initial</name>
+		<location id="id3" x="-4302" y="-4139">
+			<name x="-4360" y="-4132">initial</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-4691" y="-3927">L1==0 &amp;&amp; L2==0 &amp;&amp; L3==0</label>
-			<label kind="assignment" x="-4716" y="-3910">local_clock:=0,L1:=1,L2:=1,L3:=1</label>
+			<label kind="guard" x="-4514" y="-4190">L1==0 &amp;&amp; L2==0 &amp;&amp; L3==0</label>
+			<label kind="assignment" x="-4539" y="-4173">local_clock:=0,L1:=1,L2:=1,L3:=1</label>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-4708" y="-3741">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4708" y="-3724">L1:=0,L2:=0,L3:=0</label>
+			<label kind="guard" x="-4531" y="-4004">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4531" y="-3987">L1:=0,L2:=0,L3:=0</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-4708" y="-3859">local_clock&gt;=5</label>
-			<label kind="assignment" x="-4708" y="-3842">local_clock:=0</label>
+			<label kind="guard" x="-4531" y="-4122">local_clock&gt;=5</label>
+			<label kind="assignment" x="-4531" y="-4105">local_clock:=0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
 ns = AV(lock2,lock4,lock4);
+we = AV(lock1,lock2,lock2);
+ne = AV(lock2,lock2,lock2);
+ws = AV(lock1,lock4,cross);
+
 sn = AV(lock3,lock1,lock1);
 ew = AV(lock4,lock3,lock3);
-we = AV(lock1,lock2,lock2);
-
-ne = AV(lock2,lock2,lock2);
 sw = AV(lock3,lock3,lock3);
-es = AV(lock4,lock4,lock4);
-wn = AV(lock1,lock1,lock1);
-
-nw = AV(lock2,lock3,cross);
-se = AV(lock3,lock2,cross);
 en = AV(lock4,lock1,cross);
-ws = AV(lock1,lock4,cross);
+
+sn2 = AV(lock3,lock1,lock1);
+ew2 = AV(lock4,lock3,lock3);
+sw2 = AV(lock3,lock3,lock3);
+en2 = AV(lock4,lock1,cross);
+
 // List one or more processes to be composed into a system.
-system ns,sn,ew,we,ne,sw,es,wn,nw,se,en,ws;
+system ns,we,ne,ws,sn,ew,sw,en,sn2,ew2,sw2,en2;
     </system>
 	<queries>
 		<query>
-			<formula>A[] not(se.crossArea &amp;&amp; ws.crossArea)
+			<formula>A[] not (sw.passing and ws.passing and ne.passing)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] (gc&lt;42 imply not (ns.final and sn.final and ew.final and we.final and ne.final and sw.final and es.final and wn.final and nw.final and se.final and en.final and ws.final))
+			<formula>A[] not(sn.passing &amp;&amp; ew.passing)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; (gc==42 and ns.final and sn.final and ew.final and we.final and ne.final and sw.final and es.final and wn.final and nw.final and se.final and en.final and ws.final)
+			<formula>A[] (gc&lt;49 imply not (ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
 			</formula>
 			<comment>
 			</comment>
