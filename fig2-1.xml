@@ -32,15 +32,17 @@ chan a;</declaration>
 		<name>B</name>
 		<declaration>int m;</declaration>
 		<location id="id3" x="-102" y="-17">
+			<name x="-136" y="-51">B2</name>
 		</location>
 		<location id="id4" x="-102" y="-136">
+			<name x="-112" y="-170">B1</name>
 		</location>
 		<init ref="id4"/>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="synchronisation" x="-102" y="-93">a?</label>
-			<label kind="assignment" x="-102" y="-76">m:=n</label>
+			<label kind="synchronisation" x="-85" y="-93">a?</label>
+			<label kind="assignment" x="-85" y="-76">m:=n</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.</declaration>
+	<template>
+		<name x="5" y="5">C</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-170" y="17">
+			<name x="-195" y="-17">C2</name>
+		</location>
+		<location id="id1" x="-170" y="-68">
+			<name x="-195" y="-102">C1</name>
+			<committed/>
+		</location>
+		<location id="id2" x="-170" y="-144">
+			<name x="-195" y="-178">C0</name>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<nail x="-170" y="-127"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Co = C();
+// List one or more processes to be composed into a system.
+system Co;
+    </system>
+	<queries>
+	</queries>
+</nta>

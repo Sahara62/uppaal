@@ -49,7 +49,7 @@
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-8" y="-102">sig==green</label>
+			<label kind="guard" x="-8" y="-102">sig&gt;=green</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
