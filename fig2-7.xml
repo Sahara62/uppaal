@@ -6,12 +6,11 @@
 		<name x="5" y="5">T</name>
 		<declaration>// Place local declarations here.
 clock t;</declaration>
-		<location id="id0" x="59" y="-76">
-			<name x="49" y="-110">Finish</name>
+		<location id="id0" x="85" y="-76">
+			<name x="75" y="-110">Finish</name>
 		</location>
 		<location id="id1" x="-51" y="-76">
 			<name x="-61" y="-110">A</name>
-			<label kind="invariant" x="-61" y="-59">t&lt;=5</label>
 		</location>
 		<location id="id2" x="-161" y="-76">
 			<name x="-171" y="-110">Init</name>
@@ -20,7 +19,7 @@ clock t;</declaration>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-17" y="-93">t&gt;=2</label>
+			<label kind="guard" x="-34" y="-93">t&gt;=2 &amp;&amp; t&lt;=5</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -28,10 +27,37 @@ clock t;</declaration>
 			<label kind="assignment" x="-127" y="-76">t:=0</label>
 		</transition>
 	</template>
+	<template>
+		<name>T2</name>
+		<declaration>// Place local declarations here.
+clock t;</declaration>
+		<location id="id3" x="59" y="-76">
+			<name x="49" y="-110">Finish</name>
+		</location>
+		<location id="id4" x="-51" y="-76">
+			<name x="-61" y="-110">A</name>
+			<label kind="invariant" x="-61" y="-59">t&lt;=5</label>
+		</location>
+		<location id="id5" x="-161" y="-76">
+			<name x="-171" y="-110">Init</name>
+		</location>
+		<init ref="id5"/>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-17" y="-93">t&gt;=2</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="-127" y="-76">t:=0</label>
+		</transition>
+	</template>
 	<system>// Place template instantiations here.
 P = T();
+P2 = T2();
 // List one or more processes to be composed into a system.
-system P;
+system P,P2;
     </system>
 	<queries>
 	</queries>
