@@ -3,61 +3,60 @@
 <nta>
 	<declaration>// Place global declarations here.</declaration>
 	<template>
-		<name x="5" y="5">A</name>
-		<declaration>// Place local declarations here.
-clock timer;</declaration>
-		<location id="id0" x="85" y="-136">
-			<name x="75" y="-170">A3</name>
+		<name>U</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-170" y="17">
+			<name x="-195" y="-17">U2</name>
 		</location>
-		<location id="id1" x="-34" y="-136">
-			<name x="-44" y="-170">A2</name>
+		<location id="id1" x="-170" y="-68">
+			<name x="-195" y="-102">U1</name>
+			<urgent/>
 		</location>
-		<location id="id2" x="-153" y="-136">
-			<name x="-163" y="-170">A1</name>
+		<location id="id2" x="-170" y="-144">
+			<name x="-195" y="-178">U0</name>
 		</location>
 		<init ref="id2"/>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-16" y="-170">timer&gt;=10</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-135" y="-170">timer&gt;=10</label>
-			<label kind="assignment" x="-135" y="-136">timer:=0</label>
+			<nail x="-170" y="-127"/>
 		</transition>
 	</template>
 	<template>
-		<name>B</name>
+		<name>T</name>
 		<declaration>// Place local declarations here.
 clock timer;</declaration>
-		<location id="id3" x="85" y="-136">
-			<name x="75" y="-170">B3</name>
+		<location id="id3" x="-170" y="17">
+			<name x="-195" y="-17">T2</name>
 		</location>
-		<location id="id4" x="-34" y="-136">
-			<name x="-44" y="-170">B2</name>
+		<location id="id4" x="-170" y="-68">
+			<name x="-195" y="-102">T1</name>
 		</location>
-		<location id="id5" x="-153" y="-136">
-			<name x="-163" y="-170">B1</name>
+		<location id="id5" x="-170" y="-144">
+			<name x="-195" y="-178">T0</name>
 		</location>
 		<init ref="id5"/>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="guard" x="-16" y="-170">timer&gt;=20</label>
+			<label kind="guard" x="-136" y="-25">timer&gt;=1</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-135" y="-170">timer&gt;=10</label>
+			<label kind="assignment" x="-136" y="-102">timer:=0</label>
+			<nail x="-170" y="-127"/>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-P = A();
-P2 = B();
+Ur = U();
+Ti = T();
 // List one or more processes to be composed into a system.
-system P,P2;
+system Ur,Ti;
     </system>
 	<queries>
 	</queries>

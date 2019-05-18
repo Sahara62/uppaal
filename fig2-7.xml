@@ -31,8 +31,8 @@ clock t;</declaration>
 		<name>T2</name>
 		<declaration>// Place local declarations here.
 clock t;</declaration>
-		<location id="id3" x="59" y="-76">
-			<name x="49" y="-110">Finish</name>
+		<location id="id3" x="85" y="-76">
+			<name x="75" y="-110">Finish</name>
 		</location>
 		<location id="id4" x="-51" y="-76">
 			<name x="-61" y="-110">A</name>
