@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int lock1;
+int lock2;
+int lock3;
+int lock4;
+int lock5;
+int lock6;
+int lock7;
+int lock8;
+clock gc;</declaration>
+	<template>
+		<name x="5" y="5">AV</name>
+		<parameter>int &amp;L1, int &amp;L2,  int &amp;L3, int &amp;L4</parameter>
+		<declaration>// Place local declarations here.
+clock local_clock;</declaration>
+		<location id="id0" x="-4539" y="-3945">
+			<name x="-4607" y="-3979">final</name>
+		</location>
+		<location id="id1" x="-4539" y="-4038">
+			<name x="-4615" y="-4073">passing</name>
+			<label kind="invariant" x="-4658" y="-4047">local_clock&lt;7</label>
+		</location>
+		<location id="id2" x="-4539" y="-4139">
+			<name x="-4607" y="-4174">before</name>
+			<label kind="invariant" x="-4666" y="-4149">local_clock&lt;10</label>
+		</location>
+		<location id="id3" x="-4302" y="-4139">
+			<name x="-4360" y="-4132">initial</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-4514" y="-4190">L1==0 &amp;&amp; L2==0 &amp;&amp; L3==0 &amp;&amp; L4 == 0</label>
+			<label kind="assignment" x="-4539" y="-4173">local_clock:=0,L1:=1,L2:=1,L3:=1,L4:=1</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-4531" y="-4004">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4531" y="-3987">L1:=0,L2:=0,L3:=0,L4:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-4531" y="-4122">local_clock&gt;=5</label>
+			<label kind="assignment" x="-4530" y="-4105">local_clock:=0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+ns = AV(lock2,lock4,lock4,lock4);
+we = AV(lock1,lock2,lock2,lock2);
+
+ne = AV(lock2,lock2,lock2,lock2);
+
+
+ws = AV(lock1,lock4,lock5,lock8);
+
+// List one or more processes to be composed into a system.
+system ns,we,ne,ws;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not (sw.passing and ws.passing and ne.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not(sn.passing &amp;&amp; ew.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc&lt;49 imply not (ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
