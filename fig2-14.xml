@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int n;
+urgent broadcast chan urg;</declaration>
+	<template>
+		<name x="5" y="5">Counter</name>
+		<declaration>// Place local declarations here.
+clock t;</declaration>
+		<location id="id0" x="-195" y="-153">
+			<name x="-205" y="-187">Counter</name>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-221" y="-76">t &gt;= 1</label>
+			<label kind="assignment" x="-221" y="-59">n:=n+1,
+t:=0</label>
+			<nail x="-246" y="-85"/>
+			<nail x="-153" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Sender</name>
+		<location id="id1" x="-102" y="-17">
+			<name x="-110" y="0">final</name>
+		</location>
+		<location id="id2" x="-102" y="-153">
+			<name x="-112" y="-187">Init</name>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-102" y="-119">n == 10</label>
+			<label kind="synchronisation" x="-102" y="-102">urg!</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+P = Counter();
+P2 = Sender();
+// List one or more processes to be composed into a system.
+system P,P2;
+    </system>
+	<queries>
+	</queries>
+</nta>

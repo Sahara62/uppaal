@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+broadcast chan a;
+clock timer;
+int counter;</declaration>
+	<template>
+		<name x="5" y="5">LoopCounter</name>
+		<declaration>// Place local declarations here.
+</declaration>
+		<location id="id0" x="-246" y="0">
+			<name x="-280" y="-34">finish</name>
+		</location>
+		<location id="id1" x="-178" y="-85">
+			<name x="-188" y="-119">loop</name>
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-204" y="-42">counter &gt;= 5</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-68" y="-76">counter&lt;10</label>
+			<label kind="synchronisation" x="-69" y="-94">a!</label>
+			<label kind="assignment" x="-68" y="-59">counter := counter + 1</label>
+			<nail x="-77" y="-128"/>
+			<nail x="-77" y="-43"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Loop = LoopCounter();
+// List one or more processes to be composed into a system.
+system Loop;</system>
+	<queries>
+		<query>
+			<formula>A[] (not deadlock) or (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>

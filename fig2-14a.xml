@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int n;
+urgent broadcast chan urg;
+clock gc;</declaration>
+	<template>
+		<name x="5" y="5">Counter</name>
+		<declaration>// Place local declarations here.
+clock t;</declaration>
+		<location id="id0" x="-76" y="-153">
+			<name x="-86" y="-187">fin</name>
+		</location>
+		<location id="id1" x="-195" y="-153">
+			<name x="-229" y="-204">Counter</name>
+			<label kind="invariant" x="-229" y="-187">n &lt;= 20</label>
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-161" y="-153">n&gt;=10</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-221" y="-76">t &gt;= 1</label>
+			<label kind="assignment" x="-221" y="-59">n := n+1, t := 0</label>
+			<nail x="-246" y="-85"/>
+			<nail x="-153" y="-85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Sender</name>
+		<location id="id2" x="-102" y="-17">
+			<name x="-110" y="0">final</name>
+		</location>
+		<location id="id3" x="-102" y="-153">
+			<name x="-112" y="-187">Init</name>
+		</location>
+		<init ref="id3"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-102" y="-119">n == 10</label>
+			<label kind="synchronisation" x="-102" y="-102">urg!</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+P = Counter();
+P2 = Sender();
+// List one or more processes to be composed into a system.
+system P,P2;
+    </system>
+	<queries>
+		<query>
+			<formula>E&lt;&gt; (gc == 50 and (P.fin and P2.Init))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==10 and (P.fin and P2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc &lt; 10 imply (not(P.fin and P2.final)))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
