@@ -11,45 +11,46 @@ int lock1,lock2,lock3,lock4;</declaration>
 		<parameter>int &amp;L1,int &amp;L2,int &amp;dir,const int &amp;way</parameter>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
-		<location id="id0" x="-4471" y="-4029">
-			<name x="-4481" y="-4063">following</name>
+		<location id="id0" x="-4471" y="-4037">
+			<name x="-4471" y="-4063">following</name>
+			<label kind="invariant" x="-4454" y="-4045">local_clock&lt;7</label>
 		</location>
-		<location id="id1" x="-4539" y="-3910">
-			<name x="-4607" y="-3944">final</name>
+		<location id="id1" x="-4530" y="-3910">
+			<name x="-4598" y="-3944">final</name>
 		</location>
 		<location id="id2" x="-4598" y="-4037">
 			<name x="-4674" y="-4072">passing</name>
 			<label kind="invariant" x="-4717" y="-4046">local_clock&lt;7</label>
 		</location>
-		<location id="id3" x="-4530" y="-4139">
-			<name x="-4598" y="-4174">before</name>
-			<label kind="invariant" x="-4657" y="-4149">local_clock&lt;10</label>
+		<location id="id3" x="-4530" y="-4148">
+			<name x="-4598" y="-4183">before</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-4496" y="-4012">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4513" y="-3995">dir:=dir-1</label>
+			<label kind="guard" x="-4479" y="-4012">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4496" y="-3995">dir:=dir-1,L1:=L1-1,L2:=L2-1</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-4513" y="-4114">local_clock&gt;=3 &amp;&amp; dir&gt;=1</label>
-			<label kind="assignment" x="-4505" y="-4097">local_clock:=0,dir:=dir+1</label>
+			<label kind="guard" x="-4513" y="-4131">dir&gt;=1</label>
+			<label kind="assignment" x="-4496" y="-4114">local_clock:=0,dir:=dir+1,
+L1:=L1+1,L2:=L2+1</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
 			<label kind="guard" x="-4692" y="-4020">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4836" y="-3995">count:=count - 1,dir:=dir-1,L1:=0,L2:=0</label>
+			<label kind="assignment" x="-4768" y="-3995">count:=count - 1,dir:=dir-1,
+L1:=L1-1,L2:=L2-1</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-4768" y="-4131">local_clock&gt;=5 &amp;&amp; count&lt;=3 &amp;&amp;
-L1==0 &amp;&amp; L2==0 &amp;&amp; dir==0</label>
-			<label kind="assignment" x="-4785" y="-4105">local_clock:=0,dir:=1,
+			<label kind="guard" x="-4717" y="-4139">count&lt;=3 &amp;&amp; L1==0 &amp;&amp; L2==0</label>
+			<label kind="assignment" x="-4768" y="-4105">local_clock:=0,dir:=1,
 count:=count+1,L1:=1,L2:=1</label>
 		</transition>
 	</template>
