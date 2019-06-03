@@ -2,69 +2,78 @@
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
 	<declaration>// Place global declarations here.
-int lock1;
-int lock2;
-int lock3;
-int lock4;
-int lock5;
-int lock6;
-int lock7;
-int lock8;
-clock gc;</declaration>
+clock gc;
+int dir0,dir1,dir2,dir3,dir4,dir5,dir6,dir7,dir8,dir9,dir10,dir11;
+int count;
+int direct = 12;</declaration>
 	<template>
 		<name x="5" y="5">AV</name>
-		<parameter>int &amp;L1, int &amp;L2,  int &amp;L3, int &amp;L4</parameter>
+		<parameter>int &amp;dir,const int &amp;way</parameter>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
-		<location id="id0" x="-4539" y="-3945">
+		<location id="id0" x="-4488" y="-4046">
+			<name x="-4498" y="-4080">following</name>
+		</location>
+		<location id="id1" x="-4539" y="-3945">
 			<name x="-4607" y="-3979">final</name>
 		</location>
-		<location id="id1" x="-4539" y="-4038">
-			<name x="-4615" y="-4073">passing</name>
-			<label kind="invariant" x="-4658" y="-4047">local_clock&lt;7</label>
+		<location id="id2" x="-4590" y="-4046">
+			<name x="-4666" y="-4081">passing</name>
+			<label kind="invariant" x="-4709" y="-4055">local_clock&lt;7</label>
 		</location>
-		<location id="id2" x="-4539" y="-4139">
+		<location id="id3" x="-4539" y="-4139">
 			<name x="-4607" y="-4174">before</name>
 			<label kind="invariant" x="-4666" y="-4149">local_clock&lt;10</label>
 		</location>
-		<location id="id3" x="-4302" y="-4139">
-			<name x="-4360" y="-4132">initial</name>
-		</location>
 		<init ref="id3"/>
 		<transition>
-			<source ref="id3"/>
-			<target ref="id2"/>
-			<label kind="guard" x="-4514" y="-4190">L1==0 &amp;&amp; L2==0 &amp;&amp; L3==0 &amp;&amp; L4 == 0</label>
-			<label kind="assignment" x="-4539" y="-4173">local_clock:=0,L1:=1,L2:=1,L3:=1,L4:=1</label>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-4496" y="-4012">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4513" y="-3995">dir:=dir-1,direct:=12</label>
 		</transition>
 		<transition>
-			<source ref="id1"/>
+			<source ref="id3"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-4531" y="-4004">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4531" y="-3987">L1:=0,L2:=0,L3:=0,L4:=0</label>
+			<label kind="guard" x="-4513" y="-4114">local_clock&gt;=3 &amp;&amp; direct==way</label>
+			<label kind="assignment" x="-4505" y="-4097">local_clock:=0,dir:=dir+1</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-4531" y="-4122">local_clock&gt;=5</label>
-			<label kind="assignment" x="-4530" y="-4105">local_clock:=0</label>
+			<label kind="guard" x="-4692" y="-4020">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4836" y="-3995">count:=count - 1,dir:=dir-1,direct:=12</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-4870" y="-4131">local_clock&gt;=5 &amp;&amp; count&lt;=3 &amp;&amp; direct==12</label>
+			<label kind="assignment" x="-4785" y="-4105">local_clock:=0,dir:=dir+1,
+count:=count+dir,direct:=way</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-ns = AV(lock2,lock4,lock4,lock4);
-we = AV(lock1,lock2,lock2,lock2);
+ns = AV(dir0,0);
+we = AV(dir2,2);
+ne = AV(dir4,4);
+ws = AV(dir11,11);
 
-ne = AV(lock2,lock2,lock2,lock2);
+sn = AV(dir1,1);
+ew = AV(dir3,3);
+sw = AV(dir6,6);
+en = AV(dir10,10);
 
-
-ws = AV(lock1,lock4,lock5,lock8);
+sn2 = AV(dir1,1);
+ew2 = AV(dir3,3);
+sw2 = AV(dir6,6);
+en2 = AV(dir10,10);
 
 // List one or more processes to be composed into a system.
-system ns,we,ne,ws;
+system ns,we,ne,ws,sn,ew,sw,en,sn2,ew2,sw2,en2;
     </system>
 	<queries>
 		<query>
-			<formula>A[] not (ws.passing and ne.passing)
+			<formula>A[] not (sw.passing and ws.passing and ne.passing)
 			</formula>
 			<comment>
 			</comment>
