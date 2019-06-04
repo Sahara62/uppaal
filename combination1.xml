@@ -49,8 +49,8 @@ L1:=L1-1,L2:=L2-1</label>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-4717" y="-4139">count&lt;=3 &amp;&amp; L1==0 &amp;&amp; L2==0</label>
-			<label kind="assignment" x="-4768" y="-4105">local_clock:=0,dir:=1,
+			<label kind="guard" x="-4768" y="-4139">count&lt;=3 &amp;&amp; L1==0 &amp;&amp; L2==0</label>
+			<label kind="assignment" x="-4768" y="-4122">local_clock:=0,dir:=1,
 count:=count+1,L1:=1,L2:=1</label>
 		</transition>
 	</template>
