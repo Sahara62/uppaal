@@ -3,8 +3,8 @@
 <nta>
 	<declaration>// Place global declarations here.
 broadcast chan a;
-clock timer;
-int counter;</declaration>
+int counter;
+clock timer;</declaration>
 	<template>
 		<name x="5" y="5">LoopCounter</name>
 		<declaration>// Place local declarations here.
@@ -38,6 +38,30 @@ system Loop;</system>
 	<queries>
 		<query>
 			<formula>A[] (not deadlock) or (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E[] (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E[] (Loop.loop)
 			</formula>
 			<comment>
 			</comment>

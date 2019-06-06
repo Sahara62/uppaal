@@ -3,11 +3,11 @@
 <nta>
 	<declaration>// Place global declarations here.
 broadcast chan a;
-clock timer;</declaration>
+clock timer,t;</declaration>
 	<template>
 		<name x="5" y="5">LoopTimer</name>
 		<declaration>// Place local declarations here.
-clock t;</declaration>
+</declaration>
 		<location id="id0" x="-246" y="0">
 			<name x="-280" y="-34">finish</name>
 		</location>
@@ -38,13 +38,37 @@ system Loop;
     </system>
 	<queries>
 		<query>
+			<formula>E[] (Loop.loop)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
 			<formula>E&lt;&gt; (Loop.finish)
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
+			<formula>A[] (deadlock)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
 			<formula>A&lt;&gt; (Loop.finish)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (not deadlock) or (Loop.finish)
 			</formula>
 			<comment>
 			</comment>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int X,Y;
+urgent broadcast chan urg;</declaration>
+	<template>
+		<name x="5" y="5">Forwarding</name>
+		<declaration>// Place local declarations here.
+clock FTimer;</declaration>
+		<location id="id0" x="0" y="0">
+			<name x="-10" y="-34">forward</name>
+			<label kind="invariant" x="34" y="-8">FTimer&lt;=5</label>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-59" y="59">FTimer:=0,Y:=X</label>
+			<nail x="-51" y="51"/>
+			<nail x="42" y="51"/>
+		</transition>
+	</template>
+	<template>
+		<name>Generetor</name>
+		<declaration>clock GTimer;</declaration>
+		<location id="id1" x="0" y="0">
+			<label kind="invariant" x="-34" y="-42">GTimer&lt;=5</label>
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-195" y="17">GTimer==5</label>
+			<label kind="assignment" x="-212" y="42">GTimer:=0,X:=0</label>
+			<nail x="-68" y="85"/>
+			<nail x="-119" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id1"/>
+			<label kind="guard" x="119" y="8">GTimer == 5</label>
+			<label kind="assignment" x="110" y="34">GTimer := 5,X:=1</label>
+			<nail x="119" y="0"/>
+			<nail x="76" y="85"/>
+		</transition>
+	</template>
+	<template>
+		<name>Observer</name>
+		<declaration>clock CTimer;</declaration>
+		<location id="id2" x="-153" y="59">
+			<name x="-170" y="68">Error</name>
+		</location>
+		<location id="id3" x="-153" y="-68">
+			<name x="-178" y="-102">Obserb</name>
+		</location>
+		<location id="id4" x="-153" y="-187">
+			<name x="-163" y="-221">start</name>
+		</location>
+		<init ref="id4"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-153" y="-38">CTimer&gt;5</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-85" y="-161">X==Y</label>
+			<label kind="synchronisation" x="-76" y="-127">urg!</label>
+			<nail x="-76" y="-127"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="-289" y="-119">CTimer:=0</label>
+			<nail x="-229" y="-127"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+forwarder = Forwarding();
+generate = Generetor();
+observer = Observer();
+// List one or more processes to be composed into a system.
+system forwarder,generate,observer;
+    </system>
+	<queries>
+	</queries>
+</nta>
