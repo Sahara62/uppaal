@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock gc;
+int dir03,dir30,dir12,dir21;//go straight
+int dir01,dir13,dir32,dir20;//turn left
+int dir02,dir31,dir10,dir23;//turn right
+int count;//number of car
+int way[4];</declaration>
+	<template>
+		<name x="5" y="5">AV</name>
+		<parameter>int &amp;dir,const int &amp;set,const int &amp;go</parameter>
+		<declaration>// Place local declarations here.
+clock local_clock;</declaration>
+		<location id="id0" x="-4258" y="-4148">
+			<name x="-4268" y="-4182">initial</name>
+		</location>
+		<location id="id1" x="-4530" y="-3910">
+			<name x="-4598" y="-3944">final</name>
+		</location>
+		<location id="id2" x="-4530" y="-4037">
+			<name x="-4606" y="-4072">passing</name>
+			<label kind="invariant" x="-4649" y="-4046">local_clock&lt;7</label>
+		</location>
+		<location id="id3" x="-4530" y="-4148">
+			<name x="-4598" y="-4183">before</name>
+			<label kind="invariant" x="-4632" y="-4173">local_clock&gt;10</label>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-4386" y="-4165">count&lt;=3</label>
+			<label kind="assignment" x="-4505" y="-4139">local_clock:=0,way[set]++,way[go]++</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-4641" y="-4020">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4726" y="-3995">count:=count - 1,dir:=dir-1</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-4658" y="-4139">local_clock&gt;=5</label>
+			<label kind="assignment" x="-4726" y="-4122">local_clock:=0,dir:= dir + 1,
+count:=count+1</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+ns = AV(dir03,0,3);
+we = AV(dir21,2,1);
+
+ne = AV(dir01,0,1);
+ws = AV(dir23,2,3);
+
+sn = AV(dir30,3,0);
+ew = AV(dir12,1,2);
+
+sw = AV(dir32,3,2);
+en = AV(dir10,1,0);
+
+sn2 = AV(dir30,3,0);
+ew2 = AV(dir12,1,2);
+sw2 = AV(dir32,3,2);
+en2 = AV(dir10,1,0);
+
+// List one or more processes to be composed into a system.
+system ns,we,ne,ws,sn,ew,sw,en,sn2,ew2,sw2,en2;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not (sw.passing and ws.passing and ne.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not(sn.passing &amp;&amp; ew.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc&lt;49 imply not (ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
