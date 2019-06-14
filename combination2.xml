@@ -14,39 +14,39 @@ int cross[4];</declaration>
 		<parameter>int &amp;dir,const int &amp;set,const int &amp;go</parameter>
 		<declaration>// Place local declarations here.
 clock local_clock;</declaration>
-		<location id="id0" x="-3969" y="-3918">
-			<name x="-3979" y="-3952">initial</name>
+		<location id="id0" x="-4913" y="-4105">
+			<name x="-4923" y="-4139">initial</name>
 		</location>
-		<location id="id1" x="-4921" y="-3918">
-			<name x="-4989" y="-3952">final</name>
+		<location id="id1" x="-3944" y="-4105">
+			<name x="-4012" y="-4139">final</name>
 		</location>
-		<location id="id2" x="-4590" y="-3918">
-			<name x="-4615" y="-3952">passing</name>
-			<label kind="invariant" x="-4632" y="-3901">local_clock&lt;7</label>
+		<location id="id2" x="-4267" y="-4105">
+			<name x="-4292" y="-4139">passing</name>
+			<label kind="invariant" x="-4309" y="-4088">local_clock&lt;7</label>
 		</location>
-		<location id="id3" x="-4309" y="-3918">
-			<name x="-4343" y="-3952">before</name>
-			<label kind="invariant" x="-4360" y="-3901">local_clock&lt;10</label>
+		<location id="id3" x="-4598" y="-4105">
+			<name x="-4632" y="-4139">before</name>
+			<label kind="invariant" x="-4649" y="-4088">local_clock&lt;10</label>
 		</location>
 		<init ref="id0"/>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id3"/>
-			<label kind="guard" x="-4199" y="-3969">count&lt;=3 &amp;&amp; way[set]&lt;=1</label>
-			<label kind="assignment" x="-4190" y="-3952">local_clock:=0,way[go]++</label>
+			<label kind="guard" x="-4854" y="-4156">count&lt;=3 &amp;&amp; way[set]&lt;=0</label>
+			<label kind="assignment" x="-4845" y="-4139">local_clock:=0,way[go]++</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-4836" y="-3995">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4836" y="-3969">count--,dir--,
+			<label kind="guard" x="-4216" y="-4174">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4216" y="-4148">count--,dir--,
 way[go]--,cross[go]--</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-4539" y="-3978">local_clock&gt;=5 &amp;&amp; cross[go]&lt;1</label>
-			<label kind="assignment" x="-4539" y="-3961">local_clock:=0,dir++,
+			<label kind="guard" x="-4564" y="-4173">local_clock&gt;=5 &amp;&amp; cross[go]&lt;1</label>
+			<label kind="assignment" x="-4564" y="-4156">local_clock:=0,dir++,
 count++,cross[go]++</label>
 		</transition>
 	</template>
