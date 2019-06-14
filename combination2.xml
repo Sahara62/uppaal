@@ -38,7 +38,7 @@ clock local_clock;</declaration>
 			<source ref="id2"/>
 			<target ref="id1"/>
 			<label kind="guard" x="-4641" y="-4020">local_clock&gt;=2</label>
-			<label kind="assignment" x="-4726" y="-3995">count:=count - 1,dir:=dir-1</label>
+			<label kind="assignment" x="-4768" y="-3995">count--, dir--, way[set]--, way[go]--</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
