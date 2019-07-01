@@ -14,7 +14,6 @@ int cross[4];</declaration>
 		<parameter>int &amp;dir, const int &amp;set, const int &amp;go</parameter>
 		<declaration>// Place local declarations here.
 clock local_clock;
-//broadcast chan urg;
 int Left(int set)
 {
     if(set == 0){
@@ -81,22 +80,27 @@ way[go]++,cross[go]++,way[set]--</label>
 	<system>// Place template instantiations here.
 ns = AV(dir03,0,3);//straight
 we = AV(dir21,2,1);//straight
-
+/*
 ne = AV(dir01,0,1);//left
 ws = AV(dir23,2,3);//right
-
+*/
 sn = AV(dir30,3,0);//str
 ew = AV(dir12,1,2);//str
-
+/*
 sw = AV(dir32,3,2);//left
 en = AV(dir10,1,0);//right
+*/
 sn2 = AV(dir30,3,0);//str
 ew2 = AV(dir12,1,2);//str
 // sw2 = AV(dir32,3,2);
 // en2 = AV(dir10,1,0);
 
 // List one or more processes to be composed into a system.
-system ns,we,ne,ws,sn,ew,sw,en,sn2,ew2
+system ns,we
+/*,ne,ws*/
+,sn,ew
+/*,sw,en*/
+,sn2,ew2
 /*,sw2,en2*/;
     </system>
 	<queries>
@@ -131,7 +135,13 @@ system ns,we,ne,ws,sn,ew,sw,en,sn2,ew2
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt;(gc==18 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final and sw.final))
+			<formula>A[] (gc&lt;18 imply not (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;(gc==18 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
 			</formula>
 			<comment>
 			</comment>
