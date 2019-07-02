@@ -40,6 +40,17 @@ int Right(int set){
     }else{
         return 4;
     }
+}
+bool Passable(int set, int go){
+    if(set == 0 &amp;&amp; go == 3){
+        if(dir30 &gt;= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
 }</declaration>
 		<location id="id0" x="-4913" y="-4105">
 			<name x="-4923" y="-4139">initial</name>
