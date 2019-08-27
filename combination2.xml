@@ -100,18 +100,18 @@ ew = AV(dir12,1,2);//straight
 
 sw = AV(dir32,3,2);//left
 en = AV(dir10,1,0);//right
-/*
+
 sn2 = AV(dir30,3,0);//straight
 ew2 = AV(dir12,1,2);//straight
 sw2 = AV(dir32,3,2);
-en2 = AV(dir10,1,0);*/
+en2 = AV(dir10,1,0);
 
 // List one or more processes to be composed into a system.
 system ns,we,ne,ws
 ,sn,ew
 ,sw,en
-/*,sn2,ew2
-,sw2,en2*/;
+,sn2,ew2
+,sw2,en2;
     </system>
 	<queries>
 		<query>
