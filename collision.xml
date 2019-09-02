@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock gc;
+int dir03,dir30,dir12,dir21;//go straight
+int dir01,dir13,dir32,dir20;//turn left
+int dir02,dir31,dir10,dir23;//turn right
+int count;//number of car
+int way[4];
+int cross[4];</declaration>
+	<template>
+		<name x="5" y="5">AV</name>
+		<parameter>int &amp;dir, const int &amp;set, const int &amp;go</parameter>
+		<declaration>// Place local declarations here.
+clock local_clock;
+int Left(int set)
+{
+    if(set == 0){
+        return 1;
+    }else if(set == 3){
+        return 2;
+    }else if(set == 1){
+        return 3;
+    }else if(set == 2){
+        return 0;
+    }else{
+        return 4;
+    }
+}
+int Right(int set){
+    if(set == 3){
+        return 1;
+    }else if(set == 0){
+        return 2;
+    }else if(set == 2){
+        return 3;
+    }else if(set == 1){
+        return 0;
+    }else{
+        return 4;
+    }
+}
+bool Passable(int set, int go){
+    if(set == 0 &amp;&amp; go == 3){
+        if(dir30 &gt;= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}</declaration>
+		<location id="id0" x="-4913" y="-4105">
+			<name x="-4923" y="-4139">initial</name>
+		</location>
+		<location id="id1" x="-3944" y="-4105">
+			<name x="-4012" y="-4139">final</name>
+		</location>
+		<location id="id2" x="-4267" y="-4105">
+			<name x="-4292" y="-4139">passing</name>
+			<label kind="invariant" x="-4309" y="-4088">local_clock&lt;7</label>
+		</location>
+		<location id="id3" x="-4598" y="-4105">
+			<name x="-4632" y="-4139">before</name>
+			<label kind="invariant" x="-4649" y="-4088">local_clock&lt;10</label>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-4913" y="-4207">count&lt;=3 &amp;&amp; way[Left(set)]&lt;=0 &amp;&amp; way[Right(set)]&lt;=0</label>
+			<label kind="assignment" x="-4913" y="-4173">local_clock:=0,way[set]++</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-4216" y="-4174">local_clock&gt;=2</label>
+			<label kind="assignment" x="-4216" y="-4148">count--,dir--,
+way[go]--,cross[go]--</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-4564" y="-4173">local_clock&gt;=5 &amp;&amp; cross[go]&lt;1 &amp;&amp; count&lt;=3</label>
+			<label kind="assignment" x="-4564" y="-4156">local_clock:=0,dir++,count++,
+way[go]++,cross[go]++,way[set]--</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+ns = AV(dir03,0,3);//straight
+we = AV(dir21,2,1);//straight
+
+ne = AV(dir01,0,1);//left
+ws = AV(dir23,2,3);//right
+
+sn = AV(dir30,3,0);//straight
+ew = AV(dir12,1,2);//straight
+
+sw = AV(dir32,3,2);//left
+en = AV(dir10,1,0);//right
+
+sn2 = AV(dir30,3,0);//straight
+ew2 = AV(dir12,1,2);//straight
+sw2 = AV(dir32,3,2);
+en2 = AV(dir10,1,0);
+
+// List one or more processes to be composed into a system.
+system ns,we,ne,ws
+,sn,ew
+,sw,en
+,sn2,ew2
+,sw2,en2;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not (sw.passing and ws.passing and ne.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not(sn.passing &amp;&amp; ew.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc&lt;49 imply not (ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc&lt;18 imply not (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;(gc==18 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] not(we.passing and en.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+	</queries>
+</nta>
