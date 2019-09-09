@@ -60,11 +60,11 @@ bool Passable(int set, int go){
 		</location>
 		<location id="id2" x="-4267" y="-4105">
 			<name x="-4292" y="-4139">passing</name>
-			<label kind="invariant" x="-4309" y="-4088">local_clock&lt;7</label>
+			<label kind="invariant" x="-4318" y="-4088">local_clock&lt;7</label>
 		</location>
 		<location id="id3" x="-4598" y="-4105">
 			<name x="-4632" y="-4139">before</name>
-			<label kind="invariant" x="-4649" y="-4088">local_clock&lt;10</label>
+			<label kind="invariant" x="-4658" y="-4088">local_clock&lt;10</label>
 		</location>
 		<init ref="id0"/>
 		<transition>
@@ -76,14 +76,14 @@ bool Passable(int set, int go){
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-4216" y="-4174">local_clock&gt;=2</label>
+			<label kind="guard" x="-4216" y="-4165">local_clock&gt;=2</label>
 			<label kind="assignment" x="-4216" y="-4148">count--,dir--,
 way[go]--,cross[go]--</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-4564" y="-4173">local_clock&gt;=5 &amp;&amp; cross[go]&lt;1 &amp;&amp; count&lt;=3</label>
+			<label kind="guard" x="-4573" y="-4173">local_clock&gt;=5 &amp;&amp; cross[go]&lt;1 &amp;&amp; count&lt;=3</label>
 			<label kind="assignment" x="-4564" y="-4156">local_clock:=0,dir++,count++,
 way[go]++,cross[go]++,way[set]--</label>
 		</transition>
