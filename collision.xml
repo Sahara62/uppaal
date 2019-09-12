@@ -7,7 +7,7 @@ int dir03,dir30,dir12,dir21;//go straight
 int dir01,dir13,dir32,dir20;//turn left
 int dir02,dir31,dir10,dir23;//turn right
 int count;//number of car
-//int way[4];
+int way[4];
 int cross[4];
 int Left(int set)
 {
@@ -42,25 +42,66 @@ int Right(int set){
 		<name>AV</name>
 		<parameter>int &amp;dir, const int &amp;start, const int &amp;goal</parameter>
 		<declaration>clock time;
+/*
 bool Collision(int start,int goal){
     if(cross[Left(start)]&gt;=1 &amp;&amp; cross[Right(start)]&gt;=1){return false;}
-    if(cross[start]&gt;=1 &amp;&amp; cross[goal]&gt;=1 &amp;&amp; cross[Left(start)]==0 &amp;&amp; cross[Right(start)]==0){return true;}
-    else if(cross[start]==0 &amp;&amp; cross[goal]==0){return true;}
+    if(cross[start]&gt;=1 &amp;&amp; cross[goal]&gt;=1 &amp;&amp; cross[Left(start)]==0 &amp;&amp; cross[Right(start)]==0){return true; }
+    else if(cross[start]==0 &amp;&amp; cross[goal]==0){return true; }
     else{return false;}
 }
+*/
 
-/*
-bool Collision(dir,dir1,dir2){
-    if(cross[dir1]==0 &amp;&amp; cross[dir2]==0){return true;}
-    else if(dir &gt;= 1 &amp;&amp; cross[dir1]==1 &amp;&amp; cross[dir2]==1)
-}*/</declaration>
+bool Collision(int start,int goal){
+    if(way[start]&gt;0){return false;}
+    else if(start==0 &amp;&amp; goal==3)//ns
+    {
+        if(dir12&gt;0){return false;}
+        else if(dir21&gt;0){return false;}
+        else if(dir10&gt;0){return false;}
+        else if(dir23&gt;0){return false;}
+        else if(dir31&gt;0){return false;}
+        else if(dir03&gt;0 &amp;&amp; cross[goal]==0){return false;}
+        else{return true;}
+    }
+    else if(start==3 &amp;&amp; goal==0)//sn
+    {
+    	if(dir12&gt;0){return false;}
+        else if(dir21&gt;0){return false;}
+        else if(dir10&gt;0){return false;}
+        else if(dir23&gt;0){return false;}
+        else if(dir02&gt;0){return false;}
+        else if(dir30&gt;0 &amp;&amp; cross[goal]==0){return false;}
+        else{return true;}
+    }
+    else if(start==1 &amp;&amp; goal==2)//ew
+    {
+        if(dir03&gt;0){return false;}
+        else if(dir30&gt;0){return false;}
+        else if(dir31&gt;0){return false;}
+        else if(dir02&gt;0){return false;}
+        else if(dir23&gt;0){return false;}
+        else if(dir12&gt;0 &amp;&amp; cross[goal]==0){return false;}
+        else{return true;}
+    }
+    else if(start==2 &amp;&amp; goal==1)//we
+    {
+        if(dir03&gt;0){return false;}
+        else if(dir30&gt;0){return false;}
+        else if(dir31&gt;0){return false;}
+        else if(dir02&gt;0){return false;}
+        else if(dir10&gt;0){return false;}
+        else if(dir21&gt;0 &amp;&amp; cross[goal]==0){return false;}
+        else{return true;}
+    }
+    else{return true;}
+}</declaration>
 		<location id="id0" x="-476" y="-552">
 			<name x="-486" y="-586">passing</name>
-			<label kind="invariant" x="-501" y="-544">time&lt;5</label>
+			<label kind="invariant" x="-501" y="-527">time&lt;=3</label>
 		</location>
 		<location id="id1" x="-697" y="-552">
 			<name x="-707" y="-586">before</name>
-			<label kind="invariant" x="-705" y="-535">time&lt;8</label>
+			<label kind="invariant" x="-714" y="-518">time&lt;4</label>
 		</location>
 		<location id="id2" x="-986" y="-552">
 			<name x="-996" y="-586">inite</name>
@@ -70,7 +111,7 @@ bool Collision(dir,dir1,dir2){
 			<source ref="id0"/>
 			<target ref="id2"/>
 			<label kind="guard" x="-442" y="-569">time&gt;=2</label>
-			<label kind="assignment" x="-450" y="-544">cross[start]--,cross[goal]--,dir--,time:=0</label>
+			<label kind="assignment" x="-459" y="-544">cross[goal]--,dir--</label>
 			<nail x="-382" y="-552"/>
 			<nail x="-382" y="-450"/>
 			<nail x="-986" y="-450"/>
@@ -78,14 +119,15 @@ bool Collision(dir,dir1,dir2){
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-629" y="-586">time&gt;=5</label>
-			<label kind="assignment" x="-679" y="-552">time:=0</label>
+			<label kind="guard" x="-680" y="-569">time&gt;3 &amp;&amp; cross[goal]==0</label>
+			<label kind="assignment" x="-679" y="-544">time:=0,way[start]--,
+cross[goal]++</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
 			<label kind="guard" x="-944" y="-578">Collision(start,goal)==true</label>
-			<label kind="assignment" x="-943" y="-552">cross[start]++,cross[goal]++,
+			<label kind="assignment" x="-943" y="-552">way[start]++,
 dir++,time:=0</label>
 		</transition>
 	</template>
@@ -113,8 +155,7 @@ system ns,we
 ,sn,ew
 /*,sw,en*/
 ,sn2,ew2
-/*,sw2,en2*/;
-    </system>
+/*,sw2,en2*/;</system>
 	<queries>
 		<query>
 			<formula>A[] not (sw.passing and ws.passing and ne.passing)
