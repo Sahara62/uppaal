@@ -6,7 +6,7 @@ clock gc;
 int dir03,dir30,dir12,dir21;//go straight
 int dir01,dir13,dir32,dir20;//turn left
 int dir02,dir31,dir10,dir23;//turn right
-int count;//number of car
+//int count;//number of car
 int way[4];
 int cross[4];
 int Left(int set)
@@ -51,7 +51,7 @@ bool Collision(int start,int goal){
 }
 */
 
-bool Collision(int start,int goal){
+bool Collision(){
     if(way[start]&gt;0){return false;}
     else if(start==0 &amp;&amp; goal==3)//ns
     {
@@ -95,38 +95,38 @@ bool Collision(int start,int goal){
     }
     else{return true;}
 }</declaration>
-		<location id="id0" x="-476" y="-552">
+		<location id="id0" x="-255" y="-552">
+			<name x="-265" y="-586">final</name>
+		</location>
+		<location id="id1" x="-476" y="-552">
 			<name x="-486" y="-586">passing</name>
-			<label kind="invariant" x="-501" y="-527">time&lt;=3</label>
+			<label kind="invariant" x="-501" y="-535">time&lt;3</label>
 		</location>
-		<location id="id1" x="-697" y="-552">
+		<location id="id2" x="-697" y="-552">
 			<name x="-707" y="-586">before</name>
-			<label kind="invariant" x="-714" y="-518">time&lt;4</label>
+			<label kind="invariant" x="-722" y="-535">time&lt;4</label>
 		</location>
-		<location id="id2" x="-986" y="-552">
-			<name x="-996" y="-586">inite</name>
+		<location id="id3" x="-986" y="-552">
+			<name x="-1028" y="-586">initial</name>
 		</location>
-		<init ref="id2"/>
-		<transition>
-			<source ref="id0"/>
-			<target ref="id2"/>
-			<label kind="guard" x="-442" y="-569">time&gt;=2</label>
-			<label kind="assignment" x="-459" y="-544">cross[goal]--,dir--</label>
-			<nail x="-382" y="-552"/>
-			<nail x="-382" y="-450"/>
-			<nail x="-986" y="-450"/>
-		</transition>
+		<init ref="id3"/>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-680" y="-569">time&gt;3 &amp;&amp; cross[goal]==0</label>
-			<label kind="assignment" x="-679" y="-544">time:=0,way[start]--,
-cross[goal]++</label>
+			<label kind="guard" x="-425" y="-569">time&gt;=2</label>
+			<label kind="assignment" x="-425" y="-552">cross[goal]--,dir--</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-944" y="-578">Collision(start,goal)==true</label>
+			<label kind="guard" x="-663" y="-569">time&gt;=3</label>
+			<label kind="assignment" x="-663" y="-552">time:=0,way[start]--,
+cross[goal]++</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-944" y="-578">Collision()==true</label>
 			<label kind="assignment" x="-943" y="-552">way[start]++,
 dir++,time:=0</label>
 		</transition>
@@ -194,13 +194,13 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>A[] (gc&lt;18 imply not (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			<formula>A[] (gc&lt;16 imply not (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt;(gc==18 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
 			</formula>
 			<comment>
 			</comment>
