@@ -59,7 +59,7 @@ bool go(){
     }
     else if(turn == 0)//turn left
     {
-        if(dir[start][0] == 1 || dir[start][1]&gt;0 || dir[start][2]&gt;0){return false;}
+        if(dir[start][0] == 1 || dir[start][1]&gt;0 || dir[start][2]&gt;0 || dir[(start + 2)%4][2]&gt;0 || dir[(start + 3)%4][1]&gt;0){return false;}
         else{return true;}
     }
     else if(turn == 2)//turn right
@@ -106,24 +106,26 @@ bool go(){
 	<system>// Place template instantiations here.
 ns = AV(0,1);//straight
 we = AV(3,1);//straight
-/*
-ne = AV(0,1);//left
-ws = AV(2,3);//right
-*/
+
+ne = AV(0,0);//left
+ws = AV(3,2);//right
+se = AV(2,2);//R
+
 sn = AV(2,1);//straight
 ew = AV(1,1);//straight
 /*
-sw = AV(3,2);//left
-en = AV(1,0);//right
+sw = AV(2,0);//left
+en = AV(1,2);//right
 */
 sn2 = AV(2,1);//straight
 ew2 = AV(1,1);//straight
-/*sw2 = AV(3,2);
-en2 = AV(1,0);*/
-
+/*
+sw2 = AV(2,0);
+en2 = AV(1,2);
+*/
 // List one or more processes to be composed into a system.
 system ns,we
-/*,ne,ws*/
+,ne,ws,se
 ,sn,ew
 /*,sw,en*/
 ,sn2,ew2
@@ -154,10 +156,14 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; (gc==49 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
+			<formula>E&lt;&gt; (gc==30 and ns.final and we.final and ne.final and ws.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final)
 			</formula>
 			<comment>
 			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and ne.final and ws.final and se.final and sn.final and ew.final and sn2.final and ew2.final))</formula>
+			<comment></comment>
 		</query>
 		<query>
 			<formula>A[] not deadlock
@@ -172,8 +178,7 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
-			</formula>
+			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))</formula>
 			<comment>
 			</comment>
 		</query>
