@@ -9,7 +9,7 @@ int dir[0][1],dir[3][1],dir[1][1],dir[2][1];//turn left
 int dir[0][3],dir[3][3],dir[1][3],dir[2][3];//turn right
 int count;//number of car
 int way[4];
-int cross[4];*/
+int cross[4];
 int Left(int set)
 {
     if(set == 0){
@@ -38,7 +38,7 @@ int Right(int set){
     }
 }
 
-</declaration>
+*/</declaration>
 	<template>
 		<name>AV</name>
 		<parameter>const int &amp;start, const int &amp;turn</parameter>
@@ -51,34 +51,34 @@ bool go(){
         else if(dir[(start + 3)%4][2]&gt;0){return false;}
         else if(dir[(start + 1)%4][2]&gt;0){return false;}
         else if(dir[(start + 2)%4][2]&gt;0){return false;}
-        else if(dir[(start + 1)%4][0]==2){return false;}
-        else if(dir[start][2]&gt;0){return false;}
-        else if(dir[start][0]&gt;0){return false;}
-        else if(dir[start][1]==1){return false;}
+        else if(dir[(start + 1)%4][0]==1 || dir[(start + 1)%4][0]==3){return false;}
+        else if(dir[start][2] == 1 || dir[start][2] == 3){return false;}
+        else if(dir[start][0] == 1 || dir[start][0] == 3){return false;}
+        else if(dir[start][1] == 1 || dir[start][1] == 3){return false;}
         else{return true;}
     }
     else if(turn == 0)//turn left
     {
-        if(dir[start][0] == 1 || dir[start][1]&gt;0 || dir[start][2]&gt;0 || dir[(start + 2)%4][2]&gt;0 || dir[(start + 3)%4][1]&gt;0){return false;}
+        if(dir[start][0] == 1 || dir[start][0] == 3 || dir[start][1] == 1 || dir[start][1] == 3 || dir[start][1] == 1 || dir[start][1] == 3 || dir[(start + 2)%4][2]&gt;0 || dir[(start + 3)%4][1]&gt;0){return false;}
         else{return true;}
     }
     else if(turn == 2)//turn right
     {
-        if(dir[start][2] == 0 || dir[start][2] == 2 || dir[(start + 2)%4][2] &gt;= 0 || dir[(start + 3)%4][0] &gt;= 0 || dir[(start + 1)%4][0] &gt;= 0){return true;}
-        else{return false;}
+        if(dir[start][0] == 1 || dir[start][0] == 3 || dir[start][1] == 1 || dir[start][1] == 3 || dir[start][2] == 1 || dir[start][2] == 3 || dir[(start + 1)%4][0]&gt;0 || dir[(start + 1)%4][1]&gt;0 || dir[(start + 1)%4][2]&gt;0 || dir[(start + 2)%4][0]&gt;0 || dir[(start + 2)%4][1]&gt;0 || dir[(start + 2)%4][2]&gt;0 || dir[(start + 3)%4][1]&gt;0 || dir[(start + 3)%4][2]&gt;0){return false;}
+        else{return true;}
     }
-    else{return true;}
+    else{return false;}
 }</declaration>
-		<location id="id0" x="-255" y="-552">
-			<name x="-265" y="-586">final</name>
+		<location id="id0" x="-365" y="-552">
+			<name x="-375" y="-586">final</name>
 		</location>
-		<location id="id1" x="-476" y="-552">
-			<name x="-486" y="-586">passing</name>
-			<label kind="invariant" x="-501" y="-535">time&lt;3</label>
+		<location id="id1" x="-569" y="-552">
+			<name x="-594" y="-595">passing</name>
+			<label kind="invariant" x="-586" y="-578">time&lt;3</label>
 		</location>
-		<location id="id2" x="-697" y="-552">
-			<name x="-707" y="-586">before</name>
-			<label kind="invariant" x="-722" y="-535">time&lt;4</label>
+		<location id="id2" x="-773" y="-552">
+			<name x="-781" y="-603">before</name>
+			<label kind="invariant" x="-798" y="-578">time&lt;4</label>
 		</location>
 		<location id="id3" x="-986" y="-552">
 			<name x="-1028" y="-586">initial</name>
@@ -87,49 +87,50 @@ bool go(){
 		<transition>
 			<source ref="id1"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-425" y="-569">time&gt;=2</label>
-			<label kind="assignment" x="-493" y="-510">dir[start][turn]:=dir[start][turn] - 2</label>
+			<label kind="guard" x="-476" y="-569">time&gt;=2</label>
+			<label kind="assignment" x="-552" y="-535">dir[start][turn]:=dir[start][turn] - 2</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-663" y="-569">time&gt;=3</label>
-			<label kind="assignment" x="-714" y="-510">time:=0,dir[start][turn]++</label>
+			<label kind="guard" x="-714" y="-569">time&gt;=3</label>
+			<label kind="assignment" x="-748" y="-535">time:=0,dir[start][turn]++</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
 			<label kind="guard" x="-944" y="-578">go()==true</label>
-			<label kind="assignment" x="-1003" y="-527">time:=0,dir[start][turn]++</label>
+			<label kind="assignment" x="-977" y="-544">time:=0,dir[start][turn]++</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
+
 ns = AV(0,1);//straight
 we = AV(3,1);//straight
-
+/*
 ne = AV(0,0);//left
 ws = AV(3,2);//right
 se = AV(2,2);//R
-
+*/
 sn = AV(2,1);//straight
 ew = AV(1,1);//straight
-/*
+
 sw = AV(2,0);//left
 en = AV(1,2);//right
-*/
+
 sn2 = AV(2,1);//straight
 ew2 = AV(1,1);//straight
-/*
+
 sw2 = AV(2,0);
 en2 = AV(1,2);
-*/
+
 // List one or more processes to be composed into a system.
 system ns,we
-,ne,ws,se
+/*,ne,ws,se*/
 ,sn,ew
-/*,sw,en*/
+,sw,en
 ,sn2,ew2
-/*,sw2,en2*/;</system>
+,sw2,en2;</system>
 	<queries>
 		<query>
 			<formula>A[] not (sw.passing and ws.passing and ne.passing)
@@ -162,8 +163,16 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and ne.final and ws.final and se.final and sn.final and ew.final and sn2.final and ew2.final))</formula>
-			<comment></comment>
+			<formula>E&lt;&gt;(gc&lt;16 imply not (ns.final and we.final and ne.final and ws.final and se.final and sn.final and ew.final and sn2.final and ew2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt;(gc==34 and (ns.final and we.final and ne.final and ws.final and se.final and sn.final and ew.final and sw.final and sn2.final and ew2.final and sw2.final))
+			</formula>
+			<comment>
+			</comment>
 		</query>
 		<query>
 			<formula>A[] not deadlock
@@ -178,12 +187,25 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))</formula>
+			<formula>E&lt;&gt;(gc==16 and (ns.final and we.final and sn.final and ew.final and sn2.final and ew2.final))
+			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
 			<formula>A[] not(we.passing and en.passing)
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] (gc&lt;18 imply not  (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; (gc==18 and (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
 			</formula>
 			<comment>
 			</comment>
