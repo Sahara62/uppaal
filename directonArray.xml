@@ -199,13 +199,13 @@ system ns,we
 			</comment>
 		</query>
 		<query>
-			<formula>A[] (gc&lt;18 imply not  (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			<formula>A[] (gc&lt;23 imply not  (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
 			</formula>
 			<comment>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; (gc==18 and (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
+			<formula>E&lt;&gt; (gc==23 and (ns.final and we.final and sn.final and ew.final and sw.final and en.final and sn2.final and ew2.final and sw2.final and en2.final))
 			</formula>
 			<comment>
 			</comment>
