@@ -5,14 +5,19 @@
 	<template>
 		<name x="5" y="5">Vehicles</name>
 		<parameter>int lane</parameter>
-		<declaration>// Place local declarations here.</declaration>
+		<declaration>// Place local declarations here.
+clock time;
+</declaration>
 		<location id="id0" x="-42" y="17">
+			<name x="-76" y="-17">fin</name>
 		</location>
 		<location id="id1" x="-34" y="-68">
+			<name x="-8" y="-93">CriticalSection</name>
 		</location>
 		<location id="id2" x="-93" y="-102">
 		</location>
 		<location id="id3" x="-187" y="-102">
+			<name x="-221" y="-136">Init</name>
 		</location>
 		<init ref="id3"/>
 		<transition>
